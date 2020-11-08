@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
+import os
 from __main__ import updater
 from telegram.ext import Updater, CommandHandler
 from feedparser import parse
+
+DELAY = os.getenv("WATCH_DELAY")
 
 # Read appended text func() from a file
 def read(file):
@@ -49,4 +52,4 @@ def linux_releases(context):
 
 
 job_queue = updater.job_queue
-job_queue.run_repeating(linux_releases, 1800)
+job_queue.run_repeating(linux_releases, DELAY)
