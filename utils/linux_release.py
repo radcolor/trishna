@@ -4,8 +4,12 @@ import os
 from __main__ import updater
 from telegram.ext import Updater, CommandHandler
 from feedparser import parse
+from os.path import join
 
-DELAY = os.getenv("WATCH_DELAY")
+CNL_ID = os.getenv("CHANNEL_ID")
+CHT_ID = os.getenv("CHAT_ID")
+PVT_GRP_ID = os.getenv("PVT_CHAT_ID")
+DELAY = int(os.environ["WATCH_DELAY"])
 
 # Read appended text func() from a file
 def read(file):
@@ -44,8 +48,9 @@ def linux_releases(context):
 
             # Announce the new Linux release.
             if read(append_file) != kernel_version:
-                # Announce messages goes here.
-                print("Announcement!")
+                from utils import telegram_helper
+                telegram_helper.send_Message("*New Tag for Linux *" + series + "* is released!* \n\n"
+                + "*Version: *" + kernel_version, "PVT_GRP")
 
             # Update the version.
             write(append_file, kernel_version)
