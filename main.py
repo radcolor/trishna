@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     # Start Linux release watcher.
     logger.info("Starting Linux release watcher...")
-    from utils import linux_release
+    from snippets import linux_release
 
     # Start updater
     logger.info("Starting bot...")
