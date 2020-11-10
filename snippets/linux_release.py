@@ -6,9 +6,6 @@ from telegram.ext import Updater, CommandHandler
 from feedparser import parse
 from os.path import join
 
-CNL_ID = os.getenv("CHANNEL_ID")
-CHT_ID = os.getenv("CHAT_ID")
-PVT_GRP_ID = os.getenv("PVT_CHAT_ID")
 DELAY = int(os.environ["WATCH_DELAY"])
 
 # Read appended text func() from a file
@@ -41,7 +38,7 @@ def linux_releases(context):
 
     for i in range (0, len(kernel_list.entries)):
         # Count 4.4(LTS), Mainline and  Stable releases only.
-        if '4.4' in kernel_list.entries[i].title or 'mainline' in kernel_list.entries[i].title or 'stable' in kernel_list.entries[i].title:
+        if '4.4' in kernel_list.entries[i].title or 'stable' in kernel_list.entries[i].title:
             details = kernel_list.entries[i].id.split(',')
             release = details[2].split('.')
             series = release[0] + '.' + release[1]
@@ -62,7 +59,7 @@ def linux_releases(context):
                 text += 'Tag/Version • `v' + kernel_version + '`\n'
                 text += 'Release date • ' + details[3] + '\n\n'
                 text += 'Download • ' + '[' + final_tar_file + '](' + final_dl_url + ')'
-                telegram_helper.send_Message(text, "PVT_GRP")
+                telegram_helper.send_Message(text, "CHNL")
 
             # Update the version.
             write(append_file, kernel_version)

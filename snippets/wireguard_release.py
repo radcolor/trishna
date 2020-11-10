@@ -7,9 +7,6 @@ from telegram.ext import Updater, CommandHandler
 from feedparser import parse
 from os.path import join
 
-CNL_ID = os.getenv("CHANNEL_ID")
-CHT_ID = os.getenv("CHAT_ID")
-PVT_GRP_ID = os.getenv("PVT_CHAT_ID")
 DELAY = int(os.environ["WATCH_DELAY"])
 
 # Read appended text func() from a file
@@ -60,7 +57,7 @@ def wireguard_releases(context):
                 text += 'Git • ' + '[' + final_name + '](' + final_git_url + ')\n'
                 text += 'Tag/Version • `v' + version + '`\n\n'
                 text += 'Download • ' + '[' + final_tar_file + '](' + final_dl_url + ')'
-                telegram_helper.send_Message(text, "PVT_GRP")
+                telegram_helper.send_Message(text, "CHNL")
 
             # Update the version.
             write(append_file, version)
