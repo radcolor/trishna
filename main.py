@@ -50,6 +50,10 @@ if __name__ == '__main__':
     logger.info("Starting Linux release watcher...")
     from snippets import linux_release
 
+    # Start WireGuard release watcher.
+    logger.info("Starting WireGuard release watcher...")
+    from snippets import wireguard_release
+
     # Start updater
     logger.info("Starting bot...")
     run(updater)
