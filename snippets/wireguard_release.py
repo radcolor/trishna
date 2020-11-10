@@ -37,6 +37,8 @@ def write(file, data):
 def wireguard_releases(context):
     # WIREGUARD URL
     WG_URL = 'https://build.wireguard.com/distros.txt'
+    WG_GIT_URL = 'https://git.zx2c4.com/wireguard-linux-compat/log/?h=v'
+    WG_DL_URL = 'https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-'
 
     data = requests.get(WG_URL).text.split("\n")
     
@@ -48,8 +50,17 @@ def wireguard_releases(context):
             # Announce the new WireGuard release.
             if read(append_file) != version:
                 from utils import telegram_helper
-                telegram_helper.send_Message("*New WireGuard for Linux 3.10-5.5 is released!*\n\n"
-                + "*Version: *v" + version, "PVT_GRP")
+
+                final_name = "wireguard-linux-compat"
+                final_tar_file = final_name + "-" + version + ".tar.xz"
+                final_git_url = WG_GIT_URL + version
+                final_dl_url = WG_DL_URL + version + ".tar.xz"
+
+                text = '*WireGuard release for Linux 3.10-5.5*\n\n'
+                text += 'Git • ' + '[' + final_name + '](' + final_git_url + ')\n'
+                text += 'Tag/Version • `v' + version + '`\n\n'
+                text += 'Download • ' + '[' + final_tar_file + '](' + final_dl_url + ')'
+                telegram_helper.send_Message(text, "PVT_GRP")
 
             # Update the version.
             write(append_file, version)

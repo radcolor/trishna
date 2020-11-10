@@ -35,6 +35,8 @@ def write(file, data):
 def linux_releases(context):
     # RSS URL from kernel.org
     KERNEL_RSS_URL = 'https://www.kernel.org/feeds/kdist.xml'
+    KERNEL_GIT_URL = 'https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=v'
+    KERNEL_DL_URL = 'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-'
     kernel_list = parse(KERNEL_RSS_URL)
 
     for i in range (0, len(kernel_list.entries)):
@@ -49,8 +51,18 @@ def linux_releases(context):
             # Announce the new Linux release.
             if read(append_file) != kernel_version:
                 from utils import telegram_helper
-                telegram_helper.send_Message("*New Tag for Linux *" + series + "* is released!* \n\n"
-                + "*Version: *" + kernel_version, "PVT_GRP")
+
+                final_name_linux = "linux"
+                final_tar_file = "linux-" + kernel_version + ".tar.xz"
+                final_git_url = KERNEL_GIT_URL + kernel_version
+                final_dl_url = KERNEL_DL_URL + kernel_version + ".tar.xz"
+
+                text = '*Linux new tag for ' + series + ' is released*\n\n'
+                text += 'Git • ' + '[' + final_name_linux + '](' + final_git_url + ')\n'
+                text += 'Tag/Version • `v' + kernel_version + '`\n'
+                text += 'Release date • ' + details[3] + '\n\n'
+                text += 'Download • ' + '[' + final_tar_file + '](' + final_dl_url + ')'
+                telegram_helper.send_Message(text, "PVT_GRP")
 
             # Update the version.
             write(append_file, kernel_version)
