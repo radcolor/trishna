@@ -63,5 +63,20 @@ def wireguard_releases(context):
             write(append_file, version)
 
 
+# Create a dummy saved file at initial execution
+def dummy_file():
+    # WIREGUARD URL
+    WG_URL = 'https://build.wireguard.com/distros.txt'
+    data = requests.get(WG_URL).text.split("\n")
+    
+    for x in data:
+        if "upstream" in x and "linuxcompat" in x:
+            distro, package, version = x.split()[:3]
+            append_file = "wireguard-current"
+            # Append a initial file with version.
+            write(append_file, version)
+
+
+dummy_file()
 job_queue = updater.job_queue
 job_queue.run_repeating(wireguard_releases, DELAY)

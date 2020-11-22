@@ -65,5 +65,24 @@ def linux_releases(context):
             write(append_file, kernel_version)
 
 
+# Create a dummy saved file at initial execution
+def dummy_file():
+    # RSS URL from kernel.org
+    KERNEL_RSS_URL = 'https://www.kernel.org/feeds/kdist.xml'
+    kernel_list = parse(KERNEL_RSS_URL)
+
+    for i in range (0, len(kernel_list.entries)):
+        # Count 4.4(LTS), Mainline and  Stable releases only.
+        if '4.4' in kernel_list.entries[i].title or 'stable' in kernel_list.entries[i].title:
+            details = kernel_list.entries[i].id.split(',')
+            release = details[2].split('.')
+            series = release[0] + '.' + release[1]
+            append_file = join(series + '-current')
+            kernel_version = details[2]
+            # Append a initial file with version.
+            write(append_file, kernel_version)
+
+
+dummy_file()
 job_queue = updater.job_queue
 job_queue.run_repeating(linux_releases, DELAY)
