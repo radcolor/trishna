@@ -12,8 +12,6 @@ RUN apt update && apt upgrade -y && \
     python3-requests \
     python3
 
-RUN curl -L https://github.com/drone/drone-cli/releases/latest/download/drone_linux_amd64.tar.gz | tar zx && install -t /usr/local/bin drone
-
 RUN mkdir /app
 ADD . /app
 WORKDIR /app
