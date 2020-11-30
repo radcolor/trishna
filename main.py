@@ -31,6 +31,11 @@ def start_handler(update, context):
     logger.info("User {} has started the bot".format(update.effective_user["id"]))
 
 
+def trigger_handler(update, context):
+    update.effective_message.reply_text(
+        "arg1: %s\n arg2: %s" % (context.args[0], context.args[1]))
+
+
 def help_handler(update, context):
     print(context.chat_data)
     update.effective_message.reply_text(
@@ -44,6 +49,7 @@ if __name__ == '__main__':
 
     # Add handlers.
     dp.add_handler(CommandHandler("start", start_handler))
+    dp.add_handler(CommandHandler("trigger", trigger_handler))
     dp.add_handler(CommandHandler("help", help_handler))
 
     # Start Linux release watcher.
