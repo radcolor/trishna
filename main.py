@@ -2,6 +2,7 @@
 
 import os
 import logging
+import requests
 from telegram.ext import Updater, CommandHandler
 
 logging.basicConfig(level=logging.INFO,
@@ -10,6 +11,7 @@ logger = logging.getLogger()
 
 MODE = os.getenv("BOT_MODE")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+DRONE_TOKEN = os.getenv("DRONE_TOKEN")
 
 if MODE == "development":
     def run(updater):
@@ -32,8 +34,20 @@ def start_handler(update, context):
 
 
 def trigger_handler(update, context):
-    update.effective_message.reply_text(
-        "arg1: %s\n arg2: %s" % (context.args[0], context.args[1]))
+    REPO = context.args[0]
+    URL='https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds'
+    user = update.effective_user
+    if user.id == 1154905452:
+        # Trigger for other builds using drone.io API
+        logger.info("New CI build has been triggered by {} ".format(update.effective_user["id"]))
+        drone_header = {"Authorization": "Bearer " + DRONE_TOKEN}
+        json_out = requests.post(URL, headers=drone_header)
+        update.effective_message.reply_text(json_out.text, parse_mode="markdown", disable_web_page_preview=True)
+    elif REPO == "fakerad" and user.id == 1154905452 or user.id == 869226753:
+        # Trigger for fakerad build of kernel
+        logger.info("New fakerad build has been triggered by {} ".format(update.effective_user["id"]))
+    else:
+        logger.info("Unauthorised access by {} ".format(update.effective_user["id"]))
 
 
 def help_handler(update, context):
