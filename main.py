@@ -47,21 +47,32 @@ def trigger_handler(update, context):
     if REPO == "kernel":
         REPO = "android_kernel_xiaomi_whyred"
 
-    URL='https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds'
+    
     user = update.effective_user
 
-    if user.id == 1154905452:
+    if user.id == 1154905452 and REPO != "fakerad":
         # Trigger for other builds using drone.io API
         logger.info("New CI build has been triggered by {} ".format(update.effective_user["id"]))
         drone_header = {"Authorization": "Bearer " + DRONE_TOKEN}
 
-        branch_data = {'branch': BRANCH}
-        json_out = requests.post(URL, headers=drone_header, data=branch_data)
+        URL='https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH
+        json_out = requests.post(URL, headers=drone_header)
 
         update.effective_message.reply_text("<code>" + json_out.text + "</code>", parse_mode="html", disable_web_page_preview=True)
+
     elif REPO == "fakerad" and user.id == 1154905452 or user.id == 869226753:
         # Trigger for fakerad build of kernel
         logger.info("New fakerad build has been triggered by {} ".format(update.effective_user["id"]))
+
+        REPO = "android_kernel_xiaomi_whyred"
+        drone_header = {"Authorization": "Bearer " + DRONE_TOKEN}
+
+        params = {'CI_KERNEL_TYPE': 'fakerad'}
+        URL='https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH
+        json_out = requests.post(URL, headers=drone_header, data=params)
+
+        update.effective_message.reply_text("<code>" + json_out.text + "</code>", parse_mode="html", disable_web_page_preview=True)
+
     else:
         logger.info("Unauthorised access by {} ".format(update.effective_user["id"]))
 
