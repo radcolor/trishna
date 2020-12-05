@@ -39,7 +39,7 @@ def trigger_handler(update, context):
         BRANCH = context.args[1]
     except IndexError:
         update.effective_message.reply_text(
-            "Please define a branch name with format: /trigger <repo> <branch>")
+            "Please define a branch/param with format: <code>/trigger repo branch/param</code>", parse_mode="html")
         raise
     REPO = context.args[0]
 
@@ -56,10 +56,7 @@ def trigger_handler(update, context):
         drone_header = {"Authorization": "Bearer " + DRONE_TOKEN}
 
         branch_data = {'branch': BRANCH}
-        if not BRANCH:
-             json_out = requests.post(URL, headers=drone_header)
-        else:
-            json_out = requests.post(URL, headers=drone_header, data=branch_data)
+        json_out = requests.post(URL, headers=drone_header, data=branch_data)
 
         update.effective_message.reply_text("<code>" + json_out.text + "</code>", parse_mode="html", disable_web_page_preview=True)
     elif REPO == "fakerad" and user.id == 1154905452 or user.id == 869226753:
