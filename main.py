@@ -29,58 +29,31 @@ else:
     sys.exit(1)
 
 
-def start_handler(update, context):
-    logger.info("User {} has started the bot".format(update.effective_user["id"]))
-
-
+# Trigger for other builds using drone.io API
 def trigger_handler(update, context):
-    # See if there are 2 arguments passed
-    try:
-        BRANCH = context.args[1]
-    except IndexError:
-        update.effective_message.reply_text(
-            "Please define a branch/param with format: <code>/trigger repo branch/param</code>", parse_mode="html")
-        raise
-    REPO = context.args[0]
-
-    # Smoll hack for our kernel repo
-    if REPO == "kernel":
-        REPO = "android_kernel_xiaomi_whyred"
-
-    
     user = update.effective_user
-
-    if user.id == 1154905452 and REPO != "fakerad":
-        # Trigger for other builds using drone.io API
-        logger.info("New CI build has been triggered by {} ".format(update.effective_user["id"]))
+    if user.id == 1154905452:
+        # See if there are 2 arguments passed
+        try:
+            BRANCH = context.args[1]
+        except IndexError:
+            update.effective_message.reply_text(
+            "Please define a branch/param with format: <code>/trigger repo branch/param</code>", parse_mode="html")
+            raise
+        REPO = context.args[0]
+        
+        # Smoll hack for our kernel repo
+        if REPO == "kernel":
+            REPO = "android_kernel_xiaomi_whyred"
+        
         drone_header = {"Authorization": "Bearer " + DRONE_TOKEN}
 
-        URL='https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH
+        URL = 'https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH
         json_out = requests.post(URL, headers=drone_header)
 
         update.effective_message.reply_text("<code>" + json_out.text + "</code>", parse_mode="html", disable_web_page_preview=True)
-
-    elif REPO == "fakerad" and user.id == 1154905452 or user.id == 869226753:
-        # Trigger for fakerad build of kernel
-        logger.info("New fakerad build has been triggered by {} ".format(update.effective_user["id"]))
-
-        REPO = "android_kernel_xiaomi_whyred"
-        drone_header = {"Authorization": "Bearer " + DRONE_TOKEN}
-
-        params = {'CI_KERNEL_TYPE': 'fakerad'}
-        URL='https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH
-        json_out = requests.post(URL, headers=drone_header, data=params)
-
-        update.effective_message.reply_text("<code>" + json_out.text + "</code>", parse_mode="html", disable_web_page_preview=True)
-
     else:
         logger.info("Unauthorised access by {} ".format(update.effective_user["id"]))
-
-
-def help_handler(update, context):
-    print(context.chat_data)
-    update.effective_message.reply_text(
-        "<b>Personal Telegram helper BOT</b>", parse_mode="html")
 
 
 # Main function!
@@ -88,10 +61,8 @@ if __name__ == '__main__':
     updater = Updater(BOT_TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    # Add handlers.
-    dp.add_handler(CommandHandler("start", start_handler))
+    # Add handler(s)
     dp.add_handler(CommandHandler("trigger", trigger_handler))
-    dp.add_handler(CommandHandler("help", help_handler))
 
     # Start Linux release watcher.
     logger.info("Starting Linux release watcher...")

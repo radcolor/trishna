@@ -7,7 +7,13 @@ from telegram.ext import Updater, CommandHandler
 from feedparser import parse
 from os.path import join
 
+# Func() exec delay
 DELAY = int(os.environ["WATCH_DELAY"])
+
+# WIREGUARD URL
+WG_URL = 'https://build.wireguard.com/distros.txt'
+WG_GIT_URL = 'https://git.zx2c4.com/wireguard-linux-compat/log/?h=v'
+WG_DL_URL = 'https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-'
 
 # Read appended text func() from a file
 def read(file):
@@ -32,11 +38,6 @@ def write(file, data):
 # WireGuard releases watcher func()
 # Based on https://github.com/theradcolor/lazyscripts/blob/master/kernel/wg
 def wireguard_releases(context):
-    # WIREGUARD URL
-    WG_URL = 'https://build.wireguard.com/distros.txt'
-    WG_GIT_URL = 'https://git.zx2c4.com/wireguard-linux-compat/log/?h=v'
-    WG_DL_URL = 'https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-'
-
     data = requests.get(WG_URL).text.split("\n")
     
     for x in data:
@@ -65,8 +66,6 @@ def wireguard_releases(context):
 
 # Create a dummy saved file at initial execution
 def dummy_file():
-    # WIREGUARD URL
-    WG_URL = 'https://build.wireguard.com/distros.txt'
     data = requests.get(WG_URL).text.split("\n")
     
     for x in data:

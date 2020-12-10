@@ -6,7 +6,13 @@ from telegram.ext import Updater, CommandHandler
 from feedparser import parse
 from os.path import join
 
+# Func() exec delay
 DELAY = int(os.environ["WATCH_DELAY"])
+
+# RSS URL from kernel.org
+KERNEL_RSS_URL = 'https://www.kernel.org/feeds/kdist.xml'
+KERNEL_GIT_URL = 'https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=v'
+KERNEL_DL_URL = 'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-'
 
 # Read appended text func() from a file
 def read(file):
@@ -30,10 +36,6 @@ def write(file, data):
 
 # Linux Kernel releases via RSS feed!
 def linux_releases(context):
-    # RSS URL from kernel.org
-    KERNEL_RSS_URL = 'https://www.kernel.org/feeds/kdist.xml'
-    KERNEL_GIT_URL = 'https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=v'
-    KERNEL_DL_URL = 'https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-'
     kernel_list = parse(KERNEL_RSS_URL)
 
     for i in range (0, len(kernel_list.entries)):
@@ -67,8 +69,6 @@ def linux_releases(context):
 
 # Create a dummy saved file at initial execution
 def dummy_file():
-    # RSS URL from kernel.org
-    KERNEL_RSS_URL = 'https://www.kernel.org/feeds/kdist.xml'
     kernel_list = parse(KERNEL_RSS_URL)
 
     for i in range (0, len(kernel_list.entries)):
