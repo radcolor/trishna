@@ -8,7 +8,7 @@ from feedparser import parse
 from os.path import join
 
 # Func() exec delay
-DELAY = int(os.environ["WATCH_DELAY"])
+DELAY = int(os.environ["MED_DELAY"])
 
 # WIREGUARD URL
 WG_URL = 'https://build.wireguard.com/distros.txt'

@@ -7,7 +7,7 @@ from feedparser import parse
 from os.path import join
 
 # Func() exec delay
-DELAY = int(os.environ["WATCH_DELAY"])
+DELAY = int(os.environ["SHT_DELAY"])
 
 # RSS URL from kernel.org
 KERNEL_RSS_URL = 'https://www.kernel.org/feeds/kdist.xml'
@@ -39,7 +39,7 @@ def linux_releases(context):
     kernel_list = parse(KERNEL_RSS_URL)
 
     for i in range (0, len(kernel_list.entries)):
-        # Count 4.4(LTS), Mainline and  Stable releases only.
+        # Count 4.4(LTS) and Stable releases only.
         if '4.4' in kernel_list.entries[i].title or 'stable' in kernel_list.entries[i].title:
             details = kernel_list.entries[i].id.split(',')
             release = details[2].split('.')
@@ -72,7 +72,7 @@ def dummy_file():
     kernel_list = parse(KERNEL_RSS_URL)
 
     for i in range (0, len(kernel_list.entries)):
-        # Count 4.4(LTS), Mainline and  Stable releases only.
+        # Count 4.4(LTS) and Stable releases only.
         if '4.4' in kernel_list.entries[i].title or 'stable' in kernel_list.entries[i].title:
             details = kernel_list.entries[i].id.split(',')
             release = details[2].split('.')
