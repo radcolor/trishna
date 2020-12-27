@@ -64,6 +64,10 @@ if __name__ == '__main__':
     # Add handler(s)
     dp.add_handler(CommandHandler("trigger", trigger_handler))
 
+    # Start CarbonRom release watcher.
+    logger.info("Starting CarbonRom release watcher...")
+    from snippets import carbon_release
+
     # Start Linux release watcher.
     logger.info("Starting Linux release watcher...")
     from snippets import linux_release
