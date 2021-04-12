@@ -32,7 +32,7 @@ else:
 # Trigger for other builds using drone.io API
 def trigger_handler(update, context):
     user = update.effective_user
-    if user.id == 1154905452:
+    if user.id == 1154905452 or user.id == 869226753 or user.id == 860925514:
         # See if there are 2 arguments passed
         try:
             BRANCH = context.args[1]
