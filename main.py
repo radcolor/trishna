@@ -22,8 +22,8 @@ elif MODE == "active":
         APP_NAME = os.environ.get("APP_NAME")
         updater.start_webhook(listen="0.0.0.0",
                               port=PORT,
-                              url_path=BOT_TOKEN)
-        updater.bot.set_webhook("https://{}.herokuapp.com/{}".format(APP_NAME, BOT_TOKEN))
+                              url_path=BOT_TOKEN,
+                              webhook_url="https://{}.herokuapp.com/{}".format(APP_NAME, BOT_TOKEN))
 else:
     logger.error("No MODE specified!")
     sys.exit(1)
