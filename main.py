@@ -41,14 +41,20 @@ def trigger_handler(update, context):
             "Please define a branch/param with format: <code>/trigger repo branch/param</code>", parse_mode="html")
             raise
         REPO = context.args[0]
-        
+
         # Smoll hack for our kernel repo
         if REPO == "kernel":
             REPO = "android_kernel_xiaomi_whyred"
+
+        # Smoll hack for fakerad
+        if REPO == "fakerad":
+            REPO = "android_kernel_xiaomi_whyred"
+            URL = 'https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH + '&CI_BRANCH=' + BRANCH + '&CI_KERNEL_TYPE=fakerad' + '&TRIGGERED_CHANNEL=' + '{}'.format(update.effective_chat.id)
+        else:
+            URL = 'https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH
         
         drone_header = {"Authorization": "Bearer " + DRONE_TOKEN}
-
-        URL = 'https://cloud.drone.io/api/repos/theradcolor/' + REPO + '/builds?branch=' + BRANCH
+        
         json_out = requests.post(URL, headers=drone_header)
 
         update.effective_message.reply_text("<code>" + json_out.text + "</code>", parse_mode="html", disable_web_page_preview=True)
