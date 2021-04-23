@@ -9,12 +9,11 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 def send_Message(MESSAGE, CHAT):
 
     # Declare the ID of GROUP/CHANNEL
-    if CHAT == "CHNL":
-        CHAT_ID = os.getenv("CHANNEL_ID")
-    elif CHAT == "GRP":
-        CHAT_ID = os.getenv("CHAT_ID")
-    elif CHAT == "PVT_GRP":
-        CHAT_ID = os.getenv("PVT_CHAT_ID")
+    
+    if CHAT == "RKW_NGT_CNL":
+        CHAT_ID = os.getenv("RKW_NGT_CNL")
+    elif CHAT == "PVT_GRP_CHT":
+        CHAT_ID = os.getenv("PVT_GRP_CHT")
     else:
         print("CHAT_ID not declared!")
 

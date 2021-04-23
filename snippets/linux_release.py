@@ -61,7 +61,7 @@ def linux_releases(context):
                 text += 'Tag/Version • `v' + kernel_version + '`\n'
                 text += 'Release date • ' + details[3] + '\n\n'
                 text += 'Download • ' + '[' + final_tar_file + '](' + final_dl_url + ')'
-                telegram_helper.send_Message(text, "CHNL")
+                telegram_helper.send_Message(text, "RKW_NGT_CNL")
 
             # Update the version.
             write(append_file, kernel_version)
