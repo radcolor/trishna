@@ -81,6 +81,10 @@ if __name__ == '__main__':
     # Start WireGuard release watcher.
     logger.info("Starting WireGuard release watcher...")
     from snippets import wireguard_release
+    
+    # Start SourceForge release watcher.
+    logger.info("Starting SourceForge release watcher...")
+    from snippets import sourceforge_checker
 
     # Start updater
     logger.info("Starting bot...")
