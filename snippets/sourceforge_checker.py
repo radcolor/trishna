@@ -13,12 +13,11 @@ DELAY = int(os.environ["LNG_DELAY"])
 URLs = [
     'https://sourceforge.net/projects/fakebuilds/rss?path=/havoc',
     'https://sourceforge.net/projects/fakebuilds/rss?path=/RR',
-    'https://sourceforge.net/projects/fakecarbon/rss?path=/carbon'
+    'https://sourceforge.net/projects/fakecarbon/rss?path=/carbon',
+    'https://sourceforge.net/projects/radkernel/rss?path=/'
 ]
 
 # Read appended text func() from a file
-
-
 def read(file):
     try:
         file = open(file, 'r')
