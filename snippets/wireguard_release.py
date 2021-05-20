@@ -58,7 +58,8 @@ def wireguard_releases(context):
                 text += 'Git • ' + '[' + final_name + '](' + final_git_url + ')\n'
                 text += 'Tag/Version • `v' + version + '`\n\n'
                 text += 'Download • ' + '[' + final_tar_file + '](' + final_dl_url + ')'
-                telegram_helper.send_Message(text, "RKW_NGT_CNL")
+                telegram_helper.send_Message(text, "GIT_FDS_CNL")
+                telegram_helper.send_Message(text, "PVT_GRP_CHT")
 
             # Update the version.
             write(append_file, version)

@@ -14,6 +14,10 @@ def send_Message(MESSAGE, CHAT):
         CHAT_ID = os.getenv("RKW_NGT_CNL")
     elif CHAT == "PVT_GRP_CHT":
         CHAT_ID = os.getenv("PVT_GRP_CHT")
+    elif CHAT == "SNP_GRP_CHT":
+        CHAT_ID = os.getenv("SNP_GRP_CHT")
+    elif CHAT == "GIT_FDS_CNL":
+        CHAT_ID = os.getenv("GIT_FDS_CNL")
     else:
         print("CHAT_ID not declared!")
 

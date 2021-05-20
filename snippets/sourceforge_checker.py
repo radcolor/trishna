@@ -56,8 +56,11 @@ def sourceforge_checker(context):
                 text += 'File size • ' + str(filesize) + 'MB\n'
                 text += 'Release date • `' + date + '`\n\n'
                 text += 'Download • ' + '[' + title + '](' + link + ')'
-                telegram_helper.send_Message(text, "PVT_GRP_CHT")
-
+                telegram_helper.send_Message(text, "SNP_GRP_CHT")
+                
+                tag_msg = "@fakeyatogod @imudayveer @Nuub073 @theradcolor"
+                telegram_helper.send_Message(tag_msg, "SNP_GRP_CHT")
+                
                 # Update the version.
                 write(title, title)
 

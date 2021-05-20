@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+ #!/usr/bin/env python3
 
 import os
 from __main__ import updater
@@ -61,7 +61,8 @@ def linux_releases(context):
                 text += 'Tag/Version • `v' + kernel_version + '`\n'
                 text += 'Release date • ' + details[3] + '\n\n'
                 text += 'Download • ' + '[' + final_tar_file + '](' + final_dl_url + ')'
-                telegram_helper.send_Message(text, "RKW_NGT_CNL")
+                telegram_helper.send_Message(text, "GIT_FDS_CNL")
+                telegram_helper.send_Message(text, "PVT_GRP_CHT")
 
             # Update the version.
             write(append_file, kernel_version)

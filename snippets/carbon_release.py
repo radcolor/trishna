@@ -53,10 +53,10 @@ def carbonrom_releases(context):
         text += 'Build Date • `' + build_date + '`\n'
         text += 'Size • `' + file_size + '`\n\n'
         text += 'Download • ' + '[' + file_name + '](' + dl_link + ')'
-        telegram_helper.send_Message(text, "PVT_GRP_CHT")
+        telegram_helper.send_Message(text, "SNP_GRP_CHT")
 
-        tag_msg = "@theradcolor"
-        telegram_helper.send_Message(tag_msg, "PVT_GRP_CHT")
+        tag_msg = "@fakeyatogod @imudayveer @Nuub073 @theradcolor"
+        telegram_helper.send_Message(tag_msg, "SNP_GRP_CHT")
 
         # Update the version.
         write(append_file, file_name)
