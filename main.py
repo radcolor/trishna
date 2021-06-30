@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import subprocess
 import logging
 import requests
 from telegram.ext import Updater, CommandHandler
@@ -27,6 +28,31 @@ elif MODE == "active":
 else:
     logger.error("No MODE specified!")
     sys.exit(1)
+    
+
+# To execute terminal commands via bot
+def shell_handler(update, context):
+    user = update.effective_user
+    msg = update.effective_message
+    if user.id == 1154905452:
+        try:
+            res = subprocess.Popen(
+                context.args,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            stdout, stderr = res.communicate()
+            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            if len(result) > 2500:
+                with open("output.txt", "w+") as f:
+                    f.write(result)
+                context.bot.sendDocument(msg.chat.id, open("output.txt", "rb"))
+                os.remove("output.txt")
+            else:
+                update.effective_message.reply_text("<code>" + result + "</code>", parse_mode="html")
+        
+        except Exception as excp:
+            print("Execption!")
 
 
 # Trigger for other builds using drone.io API
@@ -68,6 +94,7 @@ if __name__ == '__main__':
     dp = updater.dispatcher
 
     # Add handler(s)
+    dp.add_handler(CommandHandler("exec", shell_handler))
     dp.add_handler(CommandHandler("trigger", trigger_handler))
 
     # Start CarbonRom release watcher.
