@@ -1,4 +1,5 @@
 bs4
+lxml
 requests
 feedparser
 python-telegram-bot
