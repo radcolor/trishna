@@ -68,6 +68,6 @@ def dummy_file():
             write("site_scraper_notice", FINAL_LINK)
 
 
-dummy_file()
+# dummy_file()
 job_queue = updater.job_queue
 job_queue.run_repeating(notice_scraper, DELAY)

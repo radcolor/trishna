@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
     # Start Linux release watcher.
     logger.info("Starting Site Scraper...")
-    from snippets import site_scrapers
+    from snippets import site_scrappers
 
     # Start WireGuard release watcher.
     logger.info("Starting WireGuard release watcher...")
