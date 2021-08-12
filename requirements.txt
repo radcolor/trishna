@@ -3,3 +3,5 @@ lxml
 requests
 feedparser
 python-telegram-bot
+sqlalchemy
+psycopg2-binary
