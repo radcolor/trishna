@@ -38,6 +38,7 @@ def notice_scraper(context):
     soup = BeautifulSoup(url.content, "lxml")
     
     for a in soup.find_all('a', {"rel": "bookmark"})[:1]:
+        LINK_TEXT = a.text
         LINK_TO_NOTICE = a['href'].replace(" ", "%20")
         
         url = requests.get(LINK_TO_NOTICE)
@@ -48,7 +49,7 @@ def notice_scraper(context):
                 from utils import telegram_helper
                 
                 text = '*New Notice Found* @theradcolor\n\n'
-                text += FINAL_LINK
+                text += '[' + LINK_TEXT + '](' + FINAL_LINK + ')'
                 telegram_helper.send_Message(text, "PVT_GRP_CHT")
                 
                 # Update the version.
