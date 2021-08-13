@@ -98,20 +98,20 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("trigger", trigger_handler))
 
     # Start CarbonRom release watcher.
-    logger.info("Starting CarbonRom release watcher...")
-    from snippets import carbon_release
+    # logger.info("Starting CarbonRom release watcher...")
+    # from snippets import carbon_release
 
     # Start Linux release watcher.
-    logger.info("Starting Linux release watcher...")
-    from snippets import linux_release
+    # logger.info("Starting Linux release watcher...")
+    # from snippets import linux_release
 
     # Start Linux release watcher.
-    logger.info("Starting Site Scraper...")
-    from snippets import site_scrappers
+    # logger.info("Starting Site Scraper...")
+    # from snippets import site_scrappers
 
     # Start WireGuard release watcher.
-    logger.info("Starting WireGuard release watcher...")
-    from snippets import wireguard_release
+    # logger.info("Starting WireGuard release watcher...")
+    # from snippets import wireguard_release
     
     # Start SourceForge release watcher.
     logger.info("Starting SourceForge release watcher...")
