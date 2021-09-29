@@ -1,7 +1,8 @@
 bs4
-lxml
-requests
 feedparser
-python-telegram-bot
-sqlalchemy
+lxml
 psycopg2-binary
+python-telegram-bot
+requests
+sqlalchemy
+telethon
