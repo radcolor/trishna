@@ -1,8 +1,8 @@
-## TrishnaBot
+## TrishnaBot: Personal telegram assistant/helper and notifier bot.
+
+![img](https://img.shields.io/github/license/radcolor/trishna)
 
 A modular bot written in rust-lang 🦀 using BotAPI, Teloxide, reqwest, scraper, and tokio libraries. Originally made for personal use for updates, tracking, and for posting stuff. Can be found on telegram as [Trishna](https://t.me/Trishna_Bot).
-
-> This repository contains the open source part of CSVTU Notice scrapper.
 
 ### Starting the bot
 
