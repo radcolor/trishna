@@ -21,7 +21,18 @@ pub async fn answer(
             bot.send_message(message.chat.id, "Help message").await?;
         }
         Command::Stream(_username) => {
-            stream_tweets::stream(_username).await?;
+            if message.from().unwrap().id == teloxide::prelude::UserId(1154905452) {
+                stream_tweets::stream(_username).await?;
+            } else {
+                bot.send_message(
+                    message.chat.id,
+                    format!(
+                        "Retards like {:?} aren't authorized.",
+                        message.from().unwrap().username
+                    ),
+                )
+                .await?;
+            }
         }
     };
     Ok(())
