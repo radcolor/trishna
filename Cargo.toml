@@ -1,9 +1,15 @@
 [package]
 name = "trishna"
 version = "0.1.0"
+authors = ["Shashank Baghel <shnk@radcolor.dev>"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "GNU/GPL-v3.0"
+description = "Personal telegram assistant/helper and notifier bot written in rust-lang using teloxide! @Trishna_Bot."
+keywords = ["telegram", "bot", "rust-lang"]
+repository = "https://git.radcolor.dev/trishna.git"
+homepage = "https://git.radcolor.dev/trishna.git"
+readme = "README.md"
+include = ["src/**/*", "LICENSE-*", "README.md"]
 
 [dependencies]
 tokio = { version = "1.19.2", features = ["rt-multi-thread", "macros"] }
