@@ -1,8 +1,0 @@
-bs4
-feedparser
-lxml
-psycopg2-binary
-python-telegram-bot
-requests
-sqlalchemy
-telethon
