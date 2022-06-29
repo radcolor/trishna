@@ -10,8 +10,8 @@ use teloxide::{prelude::*, utils::command::BotCommands, Bot};
 async fn main() {
     // Initialising pretty_env_logger
     pretty_env_logger::init();
-    log::info!("Starting TrishnaBot...");
 
+    log::info!("Starting TrishnaBot...");
     let bot = Bot::from_env().auto_send();
     teloxide::commands_repl(bot, answer, Command::ty()).await;
 }

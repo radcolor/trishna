@@ -7,6 +7,8 @@ pub enum Command {
     Help,
     #[command(description = "Echo text.")]
     Echo(String),
-    #[command(description = "handle a username.")]
-    Username(String),
+    #[command(description = "Stream a tweet from a user")]
+    Stream(String),
+    #[command(description = "Exec a shell command")]
+    Exec(String),
 }
