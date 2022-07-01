@@ -4,10 +4,14 @@ use egg_mode::user::UserID;
 use egg_mode::Token::Access;
 use egg_mode::{tweet, KeyPair};
 use regex::Regex;
+use teloxide::prelude::*;
 use std::error::Error;
 
-pub async fn stream(userid: String) -> Result<(), Box<dyn Error + Sync + Send + 'static>> {
-    let consumer = KeyPair::new(
+pub async fn stream(
+    bot: &AutoSend<Bot>,
+    message: &Message,
+    userid: String,
+) -> Result<(), Box<dyn Error + Sync + Send + 'static>> {    let consumer = KeyPair::new(
         env::var("CONSUMER_KEY").unwrap(),
         env::var("CONSUMER_KEY_SECRET").unwrap(),
     );
@@ -35,6 +39,10 @@ pub async fn stream(userid: String) -> Result<(), Box<dyn Error + Sync + Send + 
     println!("Mentions = {:?}", tweet.entities.user_mentions);
     println!("Has media = {:?}", tweet_has_media(&tweet).await);
 
+    if tweet_has_media(&tweet).await == false {
+        bot.send_message(message.chat.id, re.replace_all(tweet.text.as_str(), ""))
+            .await?;
+    }
     Ok(())
 }
 

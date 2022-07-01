@@ -22,7 +22,7 @@ pub async fn answer(
         }
         Command::Stream(_username) => {
             if message.from().unwrap().id == teloxide::prelude::UserId(1154905452) {
-                stream_tweets::stream(_username).await?;
+                stream_tweets::stream(&bot, &message, _username).await?;
             } else {
                 bot.send_message(
                     message.chat.id,
