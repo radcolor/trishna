@@ -13,7 +13,7 @@ include = ["src/**/*", "LICENSE-*", "README.md"]
 
 [dependencies]
 tokio = { version = "1.19.2", features = ["rt-multi-thread", "macros"] }
-reqwest = "0.11.11"
+reqwest = { version = "0.11.11", features = ["blocking"] }
 scraper = "0.13.0"
 futures = "0.3.21"
 log = "0.4.17"
