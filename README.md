@@ -9,6 +9,10 @@ A modular bot written in rust-lang 🦀 using BotAPI, Teloxide, reqwest, scraper
 Install the rust-lang and all dependencies then run the below command to compile and run the:
 
 ```
+// Install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+// Then use cargo to build and run the bot
 cargo run --release
 ```
 
@@ -18,4 +22,4 @@ TrishnaBot is licensed under the under version 3 of the [GNU GPL License](https:
 
 The GNU General Public License is a free, copyleft license for software and other kinds of works. When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.
 
-TrishaBot Copyright (c) 2019-2021 Shashank Baghel. All rights reserved.
+TrishnaBot Copyright (c) 2019-2021 Shashank Baghel. All rights reserved.
