@@ -13,14 +13,14 @@ include = ["src/**/*", "LICENSE-*", "README.md"]
 
 [dependencies]
 tokio = { version = "1.19.2", features = ["rt-multi-thread", "macros"] }
-reqwest = { version = "0.11.11", features = ["blocking"] }
+reqwest = { version = "0.11.11", features = ["blocking", "rustls-tls-webpki-roots"], default-features = false }
 scraper = "0.13.0"
 futures = "0.3.21"
 log = "0.4.17"
-egg-mode = "0.16.0"
+egg-mode = { version = "0.16.0", features = ["rustls_webpki"], default-features = false }
 pretty_env_logger = "0.4.0"
 regex = "1.5.6"
-teloxide = { version = "0.9.1", features = ["macros", "auto-send"] }
+teloxide = { version = "0.10.0", features = ["macros", "ctrlc_handler", "auto-send", "rustls"], default-features = false }
 
 [profile.release]
 codegen-units = 1
